@@ -7,7 +7,25 @@
     </div>
 
     <v-footer class="my-foot" color="grey lighten-2">
-      hey
+      <v-layout row>
+          <v-flex xs12>
+            <v-form @submit.prevent="submitForm">
+              <v-layout class="form-row" row>
+                <v-flex xs12>
+                  <v-text-field
+                    class="input"
+                    v-model="input"
+                    label="Message"
+                    single-line
+                  ></v-text-field>
+                </v-flex>
+                <v-flex>
+                  <v-btn type="submit" flat><v-icon>send</v-icon></v-btn>
+                </v-flex>
+              </v-layout>
+            </v-form>
+          </v-flex>
+      </v-layout>
     </v-footer>
   </div>
 </template>
@@ -16,25 +34,14 @@
 export default {
   data() {
     return {
-      messages: [
-        'lele',
-        'sl',
-        'sl',
-        'sl',
-        'sl',
-        'sl',
-        'sl',
-        'sl',
-        'sl',
-        'sl',
-        'sl',
-        'sl',
-        'sl',
-        'sl',
-        'sl',
-        'sl',
-        'sl'
-      ]
+      input: '',
+      messages: ['lele', 'sl']
+    }
+  },
+  methods: {
+    submitForm() {
+      this.messages.push(this.input)
+      this.input = ''
     }
   }
 }
@@ -59,8 +66,23 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60px;
   z-index: 5;
+}
+
+.form-row {
+  align-items: center;
+  padding: 7px 0 5px 18px;
+}
+.input {
+  padding-top: 0;
+}
+
+.input /deep/ .input-group__details {
+  min-height: 0;
+}
+
+.input /deep/ label {
+  top: 0;
 }
 </style>
 
