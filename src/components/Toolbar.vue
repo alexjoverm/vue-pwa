@@ -2,14 +2,10 @@
 <template>
   <v-toolbar app color="purple">
     <v-toolbar-items>
-      <v-btn flat>
-        <router-link class="white--text" to="/">Chat</router-link>
-      </v-btn>
+      <v-btn flat class="white--text" to="/images">Images</v-btn>
     </v-toolbar-items>
     <v-toolbar-items>
-      <v-btn flat>
-        <router-link class="white--text" to="/">Images</router-link>
-      </v-btn>
+      <v-btn flat class="white--text" to="/chat">Chat</v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
