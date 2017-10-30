@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  data: () => ({ images: [], limit: 50 }),
+  data: () => ({ images: [], limit: 20 }),
   created() {
     fetch('https://picsum.photos/list')
       .then(data => data.json())

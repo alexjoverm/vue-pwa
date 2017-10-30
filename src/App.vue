@@ -18,3 +18,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.notification {
+  position: absolute;
+}
+</style>
