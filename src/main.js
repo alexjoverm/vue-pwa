@@ -1,11 +1,14 @@
 import 'vuetify/dist/vuetify.min.css'
+import './db'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
 import Details from './components/Details'
 import Images from './components/Images'
 import Vuetify from 'vuetify'
+import VueFire from 'vuefire'
 
+Vue.use(VueFire)
 Vue.use(VueRouter)
 Vue.use(Vuetify)
 

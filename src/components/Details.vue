@@ -2,7 +2,7 @@
   <v-container class="details" fluid text-xs-center>
     <v-layout row wrap>
       <v-flex class="message-list">
-        <v-chip v-for="message in messages" :key="message">{{message}}</v-chip>
+        <v-chip v-for="message in messages" :key="message['.key']">{{message['.value']}}</v-chip>
       </v-flex>
     </v-layout>
 
@@ -13,13 +13,16 @@
 
 <script>
 import DetailsFooter from './DetailsFooter'
+import { imagesRef } from '../db'
 
 export default {
   props: ['id'],
-  data: () => ({ messages: ['lele', 'sl'] }),
+  firebase: function() {
+    return { messages: imagesRef.child(this.id).limitToLast(60) }
+  },
   methods: {
     sendMessage(input) {
-      this.messages.push(input)
+      this.$firebaseRefs.messages.push(input)
     }
   },
   components: {
