@@ -14,16 +14,27 @@
 <script>
 import DetailsFooter from './DetailsFooter'
 import { imagesRef } from '../db'
+import { save, get } from '../store'
 
 export default {
   props: ['id'],
+  data: () => ({ cachedMessages: [] }),
   firebase: function() {
-    return { messages: imagesRef.child(this.id).limitToLast(60) }
+    return { fireMessages: imagesRef.child(this.id).limitToLast(60) }
   },
   methods: {
     sendMessage(input) {
-      this.$firebaseRefs.messages.push(input)
+      this.$firebaseRefs.fireMessages.push(input)
     }
+  },
+  computed: {
+    messages() {
+      return this.fireMessages.length ? this.fireMessages : this.cachedMessages
+    }
+  },
+  created() {
+    get(this.id).then(messages => (this.cachedMessages = messages))
+    this.$watch('messages', messages => save(this.id, messages), { deep: true })
   },
   components: {
     DetailsFooter
