@@ -1,5 +1,8 @@
 import 'vuetify/dist/vuetify.min.css'
+
+// Register and initialize Firebase
 import './db'
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
