@@ -1,5 +1,7 @@
 {
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "prettier.semi": false,
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "editor.fontSize": 19,
+  "terminal.integrated.fontSize": 19
 }
