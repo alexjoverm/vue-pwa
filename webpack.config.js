@@ -1,11 +1,12 @@
 var path = require('path')
 var webpack = require('webpack')
+let SWPrecache = require('sw-precache-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: 'build.js'
   },
   module: {
@@ -50,7 +51,8 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: []
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -70,6 +72,16 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
+    }),
+    new SWPrecache({
+      cacheId: 'my-awesome-app',
+      filepath: 'service-worker.js', // place it on the root
+      staticFileGlobs: [
+        'index.html',
+        'manifest.json',
+        'dist/*.{js,css}'
+      ],
+      stripPrefix: '/' // removes the dist/ path
     })
   ])
 }
