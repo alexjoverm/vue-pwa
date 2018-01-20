@@ -23,17 +23,30 @@ const router = new VueRouter({
   ]
 })
 
-new Vue({
+const app = new Vue({
   el: '#app',
-  router,
-  render: h => h(App)
+  components: { App },
+  template: '<app :message="message" :show="show"></app>',
+  data: { message: '', show: false },
+  router
 })
 
-const prod = process.env.NODE_ENV === 'production'
-const shouldSW = 'serviceWorker' in navigator && prod
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js').then(reg => {
+    reg.onupdatefound = () => {
+      const sw = reg.installing;
 
-if (shouldSW) {
-  navigator.serviceWorker.register('/service-worker.js').then(function() {
-    console.log('Service Worker Registered');
+      sw.onstatechange = () => {
+        if (sw.state === 'installed') {
+          if (navigator.serviceWorker.controller) {
+            app.message = 'New version is available. Reload to activate it.'
+            app.show=true
+          } else {
+            app.message = 'Content is now available offline'
+            app.show=true
+          }
+        }
+      }
+    }
   })
 }
