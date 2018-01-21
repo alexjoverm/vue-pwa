@@ -15,6 +15,7 @@ Vue.use(VueFire)
 Vue.use(VueRouter)
 Vue.use(Vuetify)
 
+
 const router = new VueRouter({
   routes: [
     { path: '/images', component: Images },
@@ -22,6 +23,18 @@ const router = new VueRouter({
     { path: '/', redirect: '/images' }
   ]
 })
+
+let swUpdated = false
+
+router.beforeEach((to, from, next) => {
+  if(swUpdated) {
+    window.location.href = '/#' + to.fullPath
+    window.location.reload()
+  } else {
+    next()
+  }
+})
+
 
 const app = new Vue({
   el: '#app',
@@ -41,6 +54,7 @@ if ('serviceWorker' in navigator) {
           if (navigator.serviceWorker.controller) {
             app.message = 'New version is available. Reload to activate it.'
             app.show=true
+            swUpdated=true
           } else {
             app.message = 'Content is now available offline'
             app.show=true
