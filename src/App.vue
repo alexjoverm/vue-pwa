@@ -13,6 +13,7 @@
       v-model="show"
     >
       {{message}}
+      <v-btn flat dark color="purple" @click="reload">Install</v-btn>
     </v-snackbar>
   </v-app>
 </template>
@@ -23,6 +24,11 @@ export default {
   props: ['message', 'show'],
   components: {
     Toolbar
+  },
+  methods: {
+    reload() {
+      window.location.reload()
+    }
   }
 }
 </script>
