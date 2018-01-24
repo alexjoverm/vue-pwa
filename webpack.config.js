@@ -81,6 +81,22 @@ if (process.env.NODE_ENV === 'production') {
         'manifest.json',
         'dist/*.{js,css}'
       ],
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/(fonts|picsum)/,
+          handler: 'networkFirst'
+        },
+        {
+          urlPattern: /^https:\/\/(images|source)/,
+          handler: 'fastest',
+          options: {
+            cache: {
+              name: 'awesome-image-cache',
+              maxEntries: 4 // lru
+            }
+          }
+        }
+      ],
       stripPrefix: '/' // removes the dist/ path
     })
   ])
