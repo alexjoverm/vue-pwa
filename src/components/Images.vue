@@ -3,11 +3,7 @@
     <v-layout row wrap>
       <v-flex xs12 sm6 md4 lg3 class="message-list" v-for="image in images" :key="image.id">
         <v-card flat tile :to="`/images/${image.id}`">
-          <v-card-media
-            :src="imageUrl(image)"
-            height="150px"
-          >
-          </v-card-media>
+          <lazy-image :src="imageUrl(image)"></lazy-image>
         </v-card>
       </v-flex>
     </v-layout>
@@ -16,6 +12,8 @@
 
 
 <script>
+import LazyImage from './LazyImage'
+
 export default {
   data: () => ({ images: [], limit: 20 }),
   created() {
@@ -28,6 +26,9 @@ export default {
       const imageId = image.post_url.split('/').pop()
       return `https://source.unsplash.com/${imageId}`
     }
+  },
+  components: {
+    LazyImage
   }
 }
 </script>
