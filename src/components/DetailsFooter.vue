@@ -6,7 +6,7 @@
             <v-layout class="form-row" row>
               <v-flex xs12>
                 <v-text-field
-
+                  :disabled="!online"
                   class="input"
                   v-model="input"
                   label="Message"
