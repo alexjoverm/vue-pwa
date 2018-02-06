@@ -6,7 +6,7 @@
       </v-flex>
     </v-layout>
 
-    <DetailsFooter @send="sendMessage" />
+    <DetailsFooter :online="online" @send="sendMessage" />
   </v-container>
 </template>
 
@@ -17,9 +17,9 @@ import { imagesRef } from '../db'
 import { save, get } from '../store'
 
 export default {
-  props: ['id'],
+  props: ['id', 'online'],
   data: () => ({ cachedMessages: [] }),
-  firebase: function() {
+  firebase() {
     return { fireMessages: imagesRef.child(this.id).limitToLast(60) }
   },
   methods: {

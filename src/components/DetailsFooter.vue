@@ -14,7 +14,7 @@
                 ></v-text-field>
               </v-flex>
               <v-flex>
-                <v-btn type="submit" icon flat><v-icon>send</v-icon></v-btn>
+                <v-btn :disabled="!online" type="submit" icon flat><v-icon>send</v-icon></v-btn>
               </v-flex>
             </v-layout>
           </v-form>
@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  props: ['id'],
+  props: ['id', 'online'],
   data: () => ({ input: '' }),
   methods: {
     send() {
